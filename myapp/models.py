@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-# Create your models here.
+# this is a git test command
 class Product(models.Model):
     seller_name = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name= models.CharField(max_length=100)
