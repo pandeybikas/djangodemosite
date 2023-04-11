@@ -1,0 +1,73 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+<!--Site Hero Starts-->
+<main class="mt-10 mx-auto max-w-7xl px-4 lg:mt-20">
+    <div class="sm:text-center xl:text-left">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+            <span class="block  text-center">Premium Products </span>
+            <span class="block text-green-500  text-center"> Non-Premium Price</span>
+
+        </h1>
+    <p class="mt-3 text-base text-gray lg:mx-0 text-center">Get the best quality used product across the globe, Free Shipping.</p>    
+    </div>
+</main>
+
+<!--Site Hero Ends-->
+<div class="flex mt-5 p-10 justify-center">
+    <h2 class="text-3xl font-normal mt-0 mb-2 text-gray-500">Recent products</h2>
+</div>
+
+<div class="mt-5 p-10 justify-center">
+    <h2> Search Products </h2>
+    <form method="GET">
+    <input class="font-bold text-md text-gray-700 border rounded p-3 w-1/5" name="product_name" placeholder="Type a product to search" type="text">
+    </form>
+</div>
+
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 gap-5"> 
+    {% for product in page_obj %}
+    <a href="{% url 'myapp:producr_detail' product.id %}">
+        <div class="rounded overflow-hidden shadow-lg">
+            <img class="w-full" src="{{product.images.url}}">
+        
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">
+                {{product.name}}
+            </div>
+            <div class="font-bold text-xl text-green-500 mb-2">
+                $ {{product.price}}
+            </div>
+            <div class="font-bold text-xl text-indigo-500 mb-2">
+                Posted By - {{product.seller_name}}
+            </div>
+            <p class="text-gray-500 text-base">
+                {{product.desc}}
+            </p>
+        </div>
+    </div> 
+    </a>
+    {% endfor %}
+</div>
+<div class="pagination flex item-center justify-center mb-20">
+    <span>
+        {% if page_obj.has_previous %}
+        <a class="text-sm font-md border py-2 px-4 item-center inline-flex relative text-green-500 border-green-500" 
+            href="?page=1">First </a>
+        <a class="text-sm font-md border py-2 px-4 item-center inline-flex relative text-green-500 border-green-500"
+            href="?page={{page_obj.previous_page_number}}">Pre </a>
+        {% endif %}
+        <span>
+        page {{page_obj.number}} of {{page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a class="text-sm font-md border py-2 px-4 item-center inline-flex relative text-green-500 border-green-500" 
+            href="?page={{page_obj.next_page_number}}">Next </a>
+        <a class="text-sm font-md border py-2 px-4 item-center inline-flex relative text-green-500 border-green-500" 
+            href="?page={{page_obj.paginator.num_pages }}">Last </a>
+        {% endif %}
+    </span>
+</div>
+  
+    {% endblock content %}

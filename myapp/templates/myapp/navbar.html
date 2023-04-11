@@ -1,0 +1,30 @@
+{% load static %}
+<nav class="shadow-lg">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between">
+            <div class="flex mx-5 my-5">
+                <div>
+                    <a href="#"  class="flex item-center">
+                    <img class="h-10 w-10" src="{% static 'images/shopping.png' %}">
+                    <span class="text-yellow-500 text-xl font-semibold"> Buy & Sell </span>
+                    </a>
+                </div>
+                <div>
+                    <a href="#" class=" mx-5 my-5 text-black-500 text-lg font-semibold border-b-4 border-yellow-500">Home</a>
+                    <a href="{% url 'myapp:products' %}" class=" mx-5 my-5 text-black-500 text-lg font-semibold">All Products</a>
+                    <a href="{% url 'myapp:add_product' %}" class=" mx-5 my-5 text-black-500 text-lg font-semibold">Add Product</a>
+                    {% if user.is_authenticated %}
+                    <a href="#" class=" mx-5 my-5 text-black-500 text-lg font-semibold">Welcome {{user.username}}</a>
+                    <a href="{% url 'account' %}" class=" mx-5 my-5 text-black-500 text-lg font-semibold">Profile</a>
+                    <a href="{% url 'myapp:mylisting' %}" class=" mx-5 my-5 text-black-500 text-lg font-semibold">My Listing</a>
+                    <a href="{% url 'logout' %}" class="button mx-5 my-5 text-black-500 text-lg font-semibold">Logout</a>
+                    {% else %}
+                    
+                    <a href="{% url 'register' %}" class=" mx-5 my-5 text-black-500 text-lg font-semibold">Register</a>
+                    <a href="{% url 'login' %}" class=" mx-5 my-5 text-black-500 text-lg font-semibold">Sign-in</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
